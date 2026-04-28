@@ -353,8 +353,8 @@ npm run tauri:build
 The project currently packages successfully into:
 
 - [Desktop executable](./src-tauri/target/release/hr-analyzer-desktop.exe)
-- [MSI installer](./src-tauri/target/release/bundle/msi/Hr%20Analyzer_1.0.0_x64_en-US.msi)
-- [NSIS installer](./src-tauri/target/release/bundle/nsis/Hr%20Analyzer_1.0.0_x64-setup.exe)
+- [MSI installer](https://github.com/Ashwintomar/HrAnalyzer/releases/download/Research-Preview/Hr.Analyzer_1.0.0_x64_en-US.msi)
+- [NSIS installer](https://github.com/Ashwintomar/HrAnalyzer/releases/download/Research-Preview/Hr.Analyzer_1.0.0_x64-setup.exe)
 
 ## Configuration
 
