@@ -1,0 +1,85 @@
+{
+  "name": "hr-analyzer",
+  "version": "1.0.0",
+  "description": "Hr Analyzer - A polished submission demo for AI-assisted HR analysis, ranking, and interview support",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "dev:desktop-server": "node scripts/startDesktopDevServer.js",
+    "cleanup": "cleanup.bat",
+    "check-vectors": "node scripts/checkVectorData.js",
+    "repair-names": "node scripts/repairCandidateNames.js",
+    "compute-alignment": "node scripts/computeAlignmentMatrix.js",
+    "test-embedding": "node test_updated_embedding.js",
+    "test-robustness": "node test_semantic_robustness.js",
+    "test": "node tests/runAllTests.js",
+    "test:all": "node tests/runAllTests.js",
+    "test:lmstudio": "node tests/lmstudioEmbeddingService.test.js",
+    "start:from-scratch": "node scripts/launchDemoFromScratch.js",
+    "sidecar:build": "node scripts/buildSidecar.js",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
+  },
+  "keywords": [
+    "hr",
+    "analyzer",
+    "ai",
+    "resume",
+    "candidate",
+    "ranking"
+  ],
+  "author": "Chun",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@google/genai": "^1.15.0",
+    "@huggingface/transformers": "^3.7.2",
+    "axios": "^1.11.0",
+    "better-sqlite3": "^12.2.0",
+    "cohere-ai": "^7.10.2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "googleapis": "^161.0.0",
+    "mathjs": "^14.7.0",
+    "multer": "^2.0.1",
+    "nodejs-file-downloader": "^4.13.0",
+    "onnxruntime-web": "^1.22.0",
+    "pdf-parse": "^1.1.1",
+    "pdfkit": "^0.15.0",
+    "socket.io": "^4.8.1",
+    "sqlite-vec": "^0.1.7-alpha.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0",
+    "@yao-pkg/pkg": "^6.6.0",
+    "playwright": "^1.55.0"
+  },
+  "overrides": {
+    "simple-swizzle": "0.2.2"
+  },
+  "pkg": {
+    "assets": [
+      "public/**/*",
+      "src/**/*",
+      "node_modules/axios/**/*",
+      "node_modules/better-sqlite3/**/*",
+      "node_modules/cohere-ai/**/*",
+      "node_modules/googleapis/**/*",
+      "node_modules/nodejs-file-downloader/**/*",
+      "node_modules/pdf-parse/**/*",
+      "node_modules/sqlite-vec/**/*",
+      "node_modules/sqlite-vec/build/Release/vec.node",
+      "node_modules/sqlite-vec/build/Release/vec.dll",
+      "node_modules/sqlite-vec/lib/**/*",
+      "node_modules/sqlite-vec-windows-x64/**/*",
+      "node_modules/xlsx/**/*"
+    ],
+    "targets": [
+      "node24-win-x64"
+    ]
+  }
+}

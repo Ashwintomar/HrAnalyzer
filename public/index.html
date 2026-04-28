@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hr Analyzer - Submission Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" style="display: none;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- Mobile Overlay -->
+        <div class="mobile-overlay" id="mobile-overlay"></div>
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand-row">
+                    <div class="logo">
+                        <span class="logo-icon" aria-label="Hr Analyzer Logo">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                                <rect width="36" height="36" rx="10" fill="currentColor" class="logo-bg"/>
+                                <path d="M10 26V10m0 8h8c4 0 7-2.5 7-8v16c0-5.5-3-8-7-8h-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </svg>
+                        </span>
+                        <span class="logo-text">Hr Analyzer</span>
+                    </div>
+                    <button
+                        type="button"
+                        class="sidebar-collapse-btn"
+                        id="sidebar-collapse-btn"
+                        aria-controls="sidebar"
+                        aria-label="Collapse sidebar"
+                        title="Collapse sidebar">
+                        <svg class="sidebar-collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 18l-6-6 6-6"></path>
+                            <path d="M19 19V5"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#home" class="nav-link active" data-view="home" title="Research Dashboard" aria-label="Research Dashboard">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    <span>Research Dashboard</span>
+                </a>
+                <a href="#analyzer" class="nav-link" data-view="analyzer" title="Candidate Intelligence" aria-label="Candidate Intelligence">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                        <path d="M11 8v6M8 11h6"/>
+                    </svg>
+                    <span>Candidate Intelligence</span>
+                </a>
+                <a href="#script-generator" class="nav-link" data-view="script-generator" title="Interview Studio" aria-label="Interview Studio">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                    <span>Interview Studio</span>
+                </a>
+                <a href="#gmail-workspace" class="nav-link" data-view="gmail-workspace" title="Gmail Intake" aria-label="Gmail Intake">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </svg>
+                    <span>Gmail Intake</span>
+                </a>
+                <a href="#settings" class="nav-link" data-view="settings" title="Settings" aria-label="Settings">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-version">Submission Demo Build</div>
+            </div>
+        </aside>
+
+        <!-- Navigation Header -->
+        <nav class="nav-header">
+            <div class="nav-container">
+                <div class="header-title">
+                    <h1 id="current-view-title">Research Dashboard</h1>
+                </div>
+                <div class="nav-status">
+                    <div id="status-indicator" class="status-indicator offline">
+                        <div class="status-dot"></div>
+                        <span id="status-text">Connecting...</span>
+                    </div>
+                    <div class="embedding-mode-toggle" style="margin-left:1rem;display:flex;align-items:center;gap:.5rem;">
+                        <label for="embedding-mode-switch" style="font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;opacity:.7;">Online Embeddings</label>
+                        <input type="checkbox" id="embedding-mode-switch" />
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main id="main-content" class="main-content with-sidebar">
+
+            <!-- Home / Main Dashboard View -->
+            <div id="view-home" class="view-container">
+                <section class="welcome-section research-hero-section">
+                    <div class="welcome-content research-hero-grid">
+                        <div class="research-hero-copy">
+                            <p class="research-kicker">AI-assisted HR screening prototype for the India report demonstration</p>
+                            <div class="brand-mark">
+                                <svg width="48" height="48" viewBox="0 0 36 36" fill="none" class="brand-icon">
+                                    <rect width="36" height="36" rx="10" fill="currentColor"/>
+                                    <path d="M10 26V10m0 8h8c4 0 7-2.5 7-8v16c0-5.5-3-8-7-8h-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </svg>
+                            </div>
+                            <h1 class="welcome-title research-title">
+                                Hr Analyzer
+                                <span class="title-accent">Human-governed semantic screening for your project report demo</span>
+                            </h1>
+                            <p class="welcome-subtitle research-intro">
+                                A polished research prototype grounded in the "Impact on HR Processes Using AI Technology" report. It reduces intake friction, narrows candidate pools with embeddings, supports interview preparation, and keeps final judgment with human reviewers.
+                            </p>
+                            <div class="research-chip-row">
+                                <span class="research-chip">Gmail + URL + Excel + file intake</span>
+                                <span class="research-chip">Semantic top-N triage</span>
+                                <span class="research-chip">Shortlist export to PDF and Excel</span>
+                                <span class="research-chip">Interview support generation</span>
+                            </div>
+                            <div class="welcome-actions hero-actions">
+                                <button class="btn btn-primary hero-nav-btn" data-nav-target="analyzer">
+                                    <span>Open Candidate Intelligence</span>
+                                </button>
+                                <button class="btn btn-secondary hero-nav-btn" data-nav-target="script-generator">
+                                    <span>Open Interview Studio</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <aside class="research-hero-panel bento-tile">
+                            <div class="panel-eyebrow">Operational frame</div>
+                            <h2>Scenario C: AI-assisted screening with human-governed workflow</h2>
+                            <p>
+                                The report's preferred operating model keeps the speed gains of AI while integrating contextual review, authenticity checks, and documented human rationale.
+                            </p>
+                            <div class="hero-metric-grid">
+                                <div class="hero-metric-card">
+                                    <span class="metric-label">Stage 1</span>
+                                    <strong>Intake automation</strong>
+                                    <p>High administrative value for Gmail, URL, Excel, and resume-file collection.</p>
+                                </div>
+                                <div class="hero-metric-card">
+                                    <span class="metric-label">Stage 3</span>
+                                    <strong>Semantic triage</strong>
+                                    <p>Best used for narrowing large applicant pools, not final candidate judgment.</p>
+                                </div>
+                                <div class="hero-metric-card">
+                                    <span class="metric-label">Stage 5</span>
+                                    <strong>Interview support</strong>
+                                    <p>High-utility script drafting that turns blank-page work into guided editing.</p>
+                                </div>
+                                <div class="hero-metric-card">
+                                    <span class="metric-label">Control</span>
+                                    <strong>Human review</strong>
+                                    <p>Required for shortlist approval, context checks, and the final hiring decision.</p>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+
+                <section class="research-band">
+                    <div class="section-header research-band-header">
+                        <h2 class="section-title">Prototype Modules</h2>
+                        <p class="section-subtitle">The implemented workflows mapped directly to the report's scope and architecture.</p>
+                    </div>
+                    <div class="tool-preview-grid bento-grid research-module-grid">
+                        <div class="tool-preview-card bento-tile" data-tool="analyzer">
+                            <div class="tool-preview-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="m21 21-4.35-4.35"/>
+                                    <path d="M11 8v6M8 11h6"/>
+                                </svg>
+                            </div>
+                            <h3>Candidate Intelligence</h3>
+                            <p>Parse, embed, search, and rank candidate evidence for high-volume top-N narrowing.</p>
+                        </div>
+                        <div class="tool-preview-card bento-tile" data-tool="script-generator">
+                            <div class="tool-preview-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                </svg>
+                            </div>
+                            <h3>Interview Studio</h3>
+                            <p>Draft role-aware technical interview scripts from job descriptions and candidate context.</p>
+                        </div>
+                        <div class="tool-preview-card bento-tile" data-tool="gmail-workspace">
+                            <div class="tool-preview-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                                </svg>
+                            </div>
+                            <h3>Gmail Intake</h3>
+                            <p>Pull resume PDFs from mailbox workflows and push them into the analysis pipeline.</p>
+                        </div>
+                        <div class="tool-preview-card bento-tile research-note-card">
+                            <div class="tool-preview-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 3v18"/>
+                                    <path d="M5 8h14"/>
+                                    <path d="M5 16h14"/>
+                                </svg>
+                            </div>
+                            <h3>Explainability</h3>
+                            <p>Ranking should be interpretable through evidence snippets, confidence cues, and review notes.</p>
+                        </div>
+                        <div class="tool-preview-card bento-tile research-note-card">
+                            <div class="tool-preview-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2l7 4v6c0 5-3.5 9.5-7 10-3.5-.5-7-5-7-10V6l7-4z"/>
+                                    <path d="M9.5 12.5 11 14l3.5-4"/>
+                                </svg>
+                            </div>
+                            <h3>Authenticity Review</h3>
+                            <p>High buzzword density, weak evidence density, and contextual fit still need human scrutiny.</p>
+                        </div>
+                        <div class="tool-preview-card bento-tile research-note-card">
+                            <div class="tool-preview-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M3 3v18h18"/>
+                                    <path d="M7 15V9"/>
+                                    <path d="M12 15V6"/>
+                                    <path d="M17 15v-3"/>
+                                </svg>
+                            </div>
+                            <h3>Traceable Export</h3>
+                            <p>Shortlists and reports are structured for reviewer handoff, auditability, and project demonstration.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="research-band">
+                    <div class="section-header research-band-header">
+                        <h2 class="section-title">Workflow Evidence</h2>
+                        <p class="section-subtitle">The report's prototype architecture translated into the live submission demo.</p>
+                    </div>
+                    <div class="research-workflow-grid">
+                        <article class="workflow-step bento-tile">
+                            <span class="workflow-index">01</span>
+                            <h3>Input connectors</h3>
+                            <p>Gmail, direct resume files, URL ingestion, and Excel/CSV lists form the intake layer.</p>
+                        </article>
+                        <article class="workflow-step bento-tile">
+                            <span class="workflow-index">02</span>
+                            <h3>Parsing layer</h3>
+                            <p>Resume content is normalized so the candidate repository becomes searchable and reusable.</p>
+                        </article>
+                        <article class="workflow-step bento-tile">
+                            <span class="workflow-index">03</span>
+                            <h3>Embedding store</h3>
+                            <p>Embeddings and sqlite-backed retrieval support semantic ranking for large candidate pools.</p>
+                        </article>
+                        <article class="workflow-step bento-tile">
+                            <span class="workflow-index">04</span>
+                            <h3>Triage engine</h3>
+                            <p>Similarity ranking helps recruiters collapse bulk applications into manageable top sets.</p>
+                        </article>
+                        <article class="workflow-step bento-tile">
+                            <span class="workflow-index">05</span>
+                            <h3>Interview support</h3>
+                            <p>Generated interview scripts improve readiness and consistency for technical screening rounds.</p>
+                        </article>
+                        <article class="workflow-step bento-tile">
+                            <span class="workflow-index">06</span>
+                            <h3>Human decision</h3>
+                            <p>Shortlist approval, authenticity review, and final selection remain explicitly human-led.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="research-band research-two-column">
+                    <article class="research-evidence-card bento-tile">
+                        <div class="panel-eyebrow">What this project demonstrates clearly</div>
+                        <ul class="research-list">
+                            <li>AI support makes repetitive HR operations substantially more manageable under high applicant volume.</li>
+                            <li>Recruiters perceive value fastest when automation removes intake friction and top-of-funnel overload.</li>
+                            <li>Resume-semantic ranking is useful for triage but insufficient for final candidate quality judgment.</li>
+                            <li>Interview-support generation is a practical, lower-risk entry point for AI adoption in HR workflows.</li>
+                        </ul>
+                    </article>
+                    <article class="research-evidence-card bento-tile">
+                        <div class="panel-eyebrow">What this project does not claim</div>
+                        <ul class="research-list">
+                            <li>It does not claim that AI should replace HR decision-makers.</li>
+                            <li>It does not claim universal fairness from semantic ranking alone.</li>
+                            <li>It does not claim that polished resumes are equivalent to verified candidate competence.</li>
+                            <li>It does not claim causal hiring-quality uplift from a limited pilot without broader validation.</li>
+                        </ul>
+                    </article>
+                </section>
+
+                <section class="research-band">
+                    <div class="section-header research-band-header">
+                        <h2 class="section-title">Governance Design</h2>
+                        <p class="section-subtitle">The control layers recommended by the report for responsible deployment in India-focused HR workflows.</p>
+                    </div>
+                    <div class="research-control-grid">
+                        <article class="control-card bento-tile">
+                            <span class="panel-eyebrow">Data layer</span>
+                            <h3>Retention and consent discipline</h3>
+                            <p>Keep candidate records purpose-limited, auditable, and aligned with retention expectations.</p>
+                        </article>
+                        <article class="control-card bento-tile">
+                            <span class="panel-eyebrow">Model layer</span>
+                            <h3>Rank quality monitoring</h3>
+                            <p>Track drift, edge cases, and false-confidence patterns instead of treating rankings as static truth.</p>
+                        </article>
+                        <article class="control-card bento-tile">
+                            <span class="panel-eyebrow">Decision layer</span>
+                            <h3>Mandatory human override</h3>
+                            <p>Require explicit reviewer validation for shortlist approval, escalation, and final selection logic.</p>
+                        </article>
+                        <article class="control-card bento-tile">
+                            <span class="panel-eyebrow">Organization layer</span>
+                            <h3>Reviewer training</h3>
+                            <p>Teach teams the limits of AI triage so operational speed does not quietly outrun judgment quality.</p>
+                        </article>
+                    </div>
+                </section>
+            </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Candidate Analyzer Tool View -->
+            <div id="view-analyzer" class="view-container hidden">
+                <!-- Welcome Section for Analyzer -->
+                <section id="analyzer-welcome-section" class="welcome-section">
+                    <div class="welcome-content">
+                        <h1 class="welcome-title">
+                            Candidate Intelligence
+                            <span class="title-accent">Semantic triage with human-governed review</span>
+                        </h1>
+                        <p class="welcome-subtitle">
+                            Ingest candidate evidence, define role requirements, and narrow large applicant pools before human validation.
+                        </p>
+                        <div class="welcome-actions">
+                            <button id="get-started-btn" class="btn btn-primary">
+                                <span>Open Workbench</span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M5 12h14m-7-7l7 7-7 7"/>
+                                </svg>
+                            </button>
+                            <button id="load-pipeline-btn" class="btn btn-secondary">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                                </svg>
+                                <span>Warm Up Engine</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dashboard Section for Analyzer -->
+                <section id="analyzer-dashboard-section" class="section hidden">
+                    <div class="section-header">
+                            <h2 class="section-title">Workflow Modes</h2>
+                            <p class="section-subtitle">Select a workflow to begin processing candidates</p>
+                    </div>
+                    <div class="dashboard-grid bento-grid">
+                        <!-- Task 1: Ingest & Rank -->
+                        <div class="task-card bento-tile" id="task-ingest-rank">
+                            <div class="task-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                </svg>
+                            </div>
+                            <h3>Ingest + Rank</h3>
+                            <p>Import new intake and produce a researcher-ready top-N shortlist in one pass</p>
+                        </div>
+                        <!-- Task 2: Rank Existing -->
+                        <div class="task-card bento-tile" id="task-rank-existing">
+                            <div class="task-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </div>
+                            <h3>Rank Existing</h3>
+                            <p>Re-score the stored candidate repository against a new role brief or research scenario</p>
+                        </div>
+                        <!-- Task 3: Ingest Only -->
+                        <div class="task-card bento-tile" id="task-ingest-only">
+                            <div class="task-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                            </div>
+                            <h3>Archive Intake</h3>
+                            <p>Normalize and store candidate evidence for later retrieval, comparison, and exports</p>
+                        </div>
+                        <!-- Task 4: Recycle Vectors -->
+                        <div class="task-card bento-tile" id="task-recycle-vectors">
+                            <div class="task-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                                    <path d="M3 3v5h5"/>
+                                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                                    <path d="M16 16h5v5"/>
+                                </svg>
+                            </div>
+                            <h3>Recycle Vectors</h3>
+                            <p>Rebuild embeddings after changing model settings so ranking behavior stays consistent</p>
+                        </div>
+                        <!-- Task 5: Past Jobs -->
+                        <div class="task-card bento-tile" id="task-past-jobs">
+                            <div class="task-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                </svg>
+                            </div>
+                            <h3>Past Jobs</h3>
+                            <p>Browse previous analyses and view ranked candidates</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Processing Section for Analyzer -->
+                <section id="analyzer-processing-section" class="section hidden">
+                    <div class="section-header">
+                        <h2 class="section-title">Processing</h2>
+                        <p class="section-subtitle">Analyzing candidates and generating rankings</p>
+                    </div>
+                    <div class="processing-content">
+                        <div class="progress-container bento-tile">
+                            <div class="progress-bar">
+                                <div id="progress-fill" class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="progress-percentage">0%</span>
+                                <span id="progress-status">Initializing...</span>
+                            </div>
+                        </div>
+                        <div id="processing-log" class="processing-log bento-tile"></div>
+                    </div>
+                </section>
+
+                <!-- Results Section for Analyzer -->
+                <section id="analyzer-results-section" class="section hidden">
+                    <div class="section-header">
+                        <h2 class="section-title">Ranked Results</h2>
+                        <p class="section-subtitle">Candidates ordered by semantic relevance score</p>
+                    </div>
+                    <div class="results-content">
+                        <div class="results-filters bento-tile">
+                            <div class="filter-group">
+                                <label for="results-limit">Show top:</label>
+                                <select id="results-limit">
+                                    <option value="10">10 candidates</option>
+                                    <option value="25" selected>25 candidates</option>
+                                    <option value="50">50 candidates</option>
+                                </select>
+                            </div>
+                            <button id="view-past-jobs-btn" class="btn btn-secondary">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12,6 12,12 16,14"/>
+                                </svg>
+                                <span>Past Jobs</span>
+                            </button>
+                            <button id="export-results-btn" class="btn btn-secondary">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17,8 12,3 7,8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                                <span>Export</span>
+                            </button>
+                        </div>
+                        <div id="results-list" class="results-list">
+                            <!-- Results will be populated here -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Script Generator Tool View -->
+            <div id="view-script-generator" class="view-container hidden">
+                <section id="script-generator-input-section" class="section">
+                    <div class="section-header">
+                    <h2 class="section-title">Interview Script Studio</h2>
+                        <p class="section-subtitle">Provide a job description and a candidate's resume to generate a tailored L1 technical interview script.</p>
+                    </div>
+                    <div class="script-generator-form">
+                        <div class="form-group">
+                            <label for="sg-job-description">Job Description</label>
+                            <textarea id="sg-job-description" rows="10" placeholder="Paste the full job description here..."></textarea>
+                        </div>
+                        <div class="upload-area">
+                            <div id="sg-file-drop-zone" class="file-drop-zone">
+                                <div class="drop-zone-content">
+                                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="7,10 12,15 17,10"/>
+                                        <line x1="12" y1="15" x2="12" y2="3"/>
+                                    </svg>
+                                    <h3>Drop Resume PDF here</h3>
+                                    <p>or click to browse</p>
+                                    <input type="file" id="sg-file-input" accept=".pdf" hidden>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center" style="margin-top: 2rem;">
+                            <button id="start-script-generation-btn" class="btn btn-primary">
+                                <span>Generate Script</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="script-generator-results-section" class="section hidden">
+                    <div class="section-header">
+                        <h2 id="sg-results-title" class="section-title">Generated Interview Script</h2>
+                        <div class="results-actions">
+                            <button id="export-script-btn" class="btn btn-secondary">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10,9 9,9 8,9"/>
+                                </svg>
+                                Export as PDF
+                            </button>
+                            <button id="copy-script-btn" class="btn btn-secondary">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="m5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                                Copy Script
+                            </button>
+                        </div>
+                    </div>
+                    <div id="sg-results-container" class="structured-results-container">
+                        <!-- Structured results will be populated here -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Gmail Workspace Tool View -->
+            <div id="view-gmail-workspace" class="view-container hidden">
+                <section id="gmail-workspace-intro-section" class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Gmail Resume Extraction</h2>
+                        <p class="section-subtitle">Connect your Gmail account to automatically extract and process resume PDFs</p>
+                    </div>
+                    
+                    <!-- Connection Status -->
+                    <div id="gmail-connection-status" class="settings-card bento-tile" style="margin-bottom: 2rem;">
+                        <div class="settings-card-content">
+                            <div id="gmail-not-connected" class="connection-state">
+                                <div class="connection-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                    </svg>
+                                </div>
+                                <h3 style="text-align: center; margin-bottom: 0.5rem;">Not Connected</h3>
+                        <p style="text-align: center; opacity: 0.7; margin-bottom: 1.5rem;">Authorize Hr Analyzer to access Gmail and collect resume PDFs for the research demo workflow</p>
+                                <div style="text-align: center;">
+                                    <button id="gmail-connect-btn" class="btn btn-primary">
+                                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                                        </svg>
+                                        <span>Connect Gmail</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div id="gmail-connected" class="connection-state hidden">
+                                <div class="connection-icon connected">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                        <polyline points="22 4 12 14.01 9 11.01"/>
+                                    </svg>
+                                </div>
+                                <h3 style="text-align: center; margin-bottom: 0.5rem;">Connected</h3>
+                                <p id="gmail-connected-email" style="text-align: center; opacity: 0.7; margin-bottom: 1rem;"></p>
+                                <div style="text-align: center; display: flex; gap: 0.75rem; justify-content: center;">
+                                    <button id="gmail-disconnect-btn" class="btn btn-secondary">
+                                        <span>Disconnect</span>
+                                    </button>
+                                    <button id="gmail-test-connection-btn" class="btn btn-secondary">
+                                        <span>Test Connection</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Form -->
+                    <div id="gmail-filter-form" class="settings-card bento-tile hidden">
+                        <div class="settings-card-header">
+                            <h3 class="settings-card-title">
+                                <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="m21 21-4.35-4.35"/>
+                                </svg>
+                                Email Filters
+                            </h3>
+                            <p class="settings-card-subtitle">Configure filters to search for resume PDFs in your Gmail</p>
+                        </div>
+                        <div class="settings-card-content">
+                            <div class="setting-group">
+                                <label class="setting-label">Date Range</label>
+                                <div class="mode-toggle-container">
+                                    <div class="mode-option" data-mode="30">
+                                        <input type="radio" id="gmail-days-30" name="gmail-days" value="30" checked>
+                                        <label for="gmail-days-30" class="mode-label">
+                                            <div class="mode-info">
+                                                <div class="mode-title">Past 30 Days</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="mode-option" data-mode="15">
+                                        <input type="radio" id="gmail-days-15" name="gmail-days" value="15">
+                                        <label for="gmail-days-15" class="mode-label">
+                                            <div class="mode-info">
+                                                <div class="mode-title">Past 15 Days</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="mode-option" data-mode="7">
+                                        <input type="radio" id="gmail-days-7" name="gmail-days" value="7">
+                                        <label for="gmail-days-7" class="mode-label">
+                                            <div class="mode-info">
+                                                <div class="mode-title">Past 7 Days</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-group">
+                                <label class="setting-label" for="gmail-custom-days">Or Custom Days</label>
+                                <input type="number" id="gmail-custom-days" class="setting-input" min="1" max="365" placeholder="e.g., 45">
+                                <div class="setting-description">Leave empty to use selected preset above</div>
+                            </div>
+                            
+                            <div class="setting-group">
+                                <label class="setting-label" for="gmail-text-filter">Text/Keyword Filter (Optional)</label>
+                                <input type="text" id="gmail-text-filter" class="setting-input" placeholder="e.g., resume, application, CV">
+                                <div class="setting-description">Search for emails containing this text in subject or body</div>
+                            </div>
+                            
+                            <div style="text-align: center; margin-top: 2rem;">
+                                <button id="gmail-start-fetch-btn" class="btn btn-primary">
+                                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="7,10 12,15 17,10"/>
+                                        <line x1="12" y1="15" x2="12" y2="3"/>
+                                    </svg>
+                                    <span>Start Fetching Resumes</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Processing Section -->
+                <section id="gmail-processing-section" class="section hidden">
+                    <div class="section-header">
+                        <h2 class="section-title">Processing Resumes</h2>
+                        <p class="section-subtitle">Extracting and analyzing resume PDFs from your Gmail</p>
+                    </div>
+                    <div class="processing-content">
+                        <div class="progress-container bento-tile">
+                            <div class="progress-bar">
+                                <div id="gmail-progress-fill" class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="gmail-progress-percentage">0%</span>
+                                <span id="gmail-progress-status">Initializing...</span>
+                            </div>
+                        </div>
+                        <div id="gmail-processing-log" class="processing-log bento-tile"></div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section id="gmail-results-section" class="section hidden">
+                    <div class="section-header">
+                        <h2 class="section-title">Extraction Complete</h2>
+                        <p class="section-subtitle">Successfully processed resumes from your Gmail</p>
+                    </div>
+                    <div class="results-content">
+                        <div id="gmail-results-stats" class="stats-grid bento-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                            <!-- Stats will be populated here -->
+                        </div>
+                        <div style="text-align: center;">
+                            <button id="gmail-new-fetch-btn" class="btn btn-secondary">
+                                <span>Fetch More Resumes</span>
+                            </button>
+                            <button id="gmail-view-analyzer-btn" class="btn btn-primary">
+                                <span>Go to Analyzer</span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M5 12h14m-7-7l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Settings View -->
+            <div id="view-settings" class="view-container hidden">
+                <section class="settings-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Settings</h2>
+                        <p class="section-subtitle">Configure models, API keys, and processing preferences</p>
+                    </div>
+                    
+                    <div class="settings-content bento-grid-settings">
+                        <!-- Embedding Models Section -->
+                        <div class="settings-card bento-tile">
+                            <div class="settings-card-header">
+                                <h3 class="settings-card-title">
+                                    <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                    Embedding Models
+                                </h3>
+                                <p class="settings-card-subtitle">Configure models for semantic analysis and candidate ranking</p>
+                            </div>
+                            <div class="settings-card-content">
+                                <!-- Embedding Processing Mode -->
+                                <div class="setting-group">
+                                    <label class="setting-label">Embedding Processing Mode</label>
+                                    <div class="mode-toggle-container">
+                                        <div class="mode-option" data-mode="local">
+                                            <input type="radio" id="embedding-mode-local" name="embedding-processing-mode" value="local" checked>
+                                            <label for="embedding-mode-local" class="mode-label">
+                                                <div class="mode-icon">💻</div>
+                                                <div class="mode-info">
+                                                    <div class="mode-title">Local Embedding</div>
+                                                    <div class="mode-description">Private, fast, no internet required</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="mode-option" data-mode="online">
+                                            <input type="radio" id="embedding-mode-online" name="embedding-processing-mode" value="online">
+                                            <label for="embedding-mode-online" class="mode-label">
+                                                <div class="mode-icon">☁️</div>
+                                                <div class="mode-info">
+                                                    <div class="mode-title">Online Embedding</div>
+                                                    <div class="mode-description">Advanced models, requires API keys</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Local Embedding Models -->
+                                <div id="local-embedding-section" class="setting-group">
+                                    <label class="setting-label">Local Embedding Model</label>
+                                    <select id="local-embedding-select" class="setting-select">
+                                        <option value="bge-base" data-description="High-performance model with 768 dimensions. Best for quality and accuracy." data-performance="High" data-memory="~2GB">
+                                            BGE-Base (768d) - High Performance
+                                        </option>
+                                        <option value="bge-small" data-description="Lightweight model with 384 dimensions. Faster processing with good quality." data-performance="Fast" data-memory="~500MB">
+                                            BGE-Small (384d) - Fast & Efficient
+                                        </option>
+                                        <option value="lmstudio" data-description="Connect to LM Studio's local REST API for custom embeddings." data-performance="Host-dependent" data-memory="External">
+                                            LM Studio REST (Local Server)
+                                        </option>
+                                    </select>
+                                    <div id="local-embedding-info" class="model-info">
+                                        <div class="model-stats">
+                                            <span class="model-stat">
+                                                <span class="stat-label">Performance:</span>
+                                                <span class="stat-value" id="local-embedding-perf">High</span>
+                                            </span>
+                                            <span class="model-stat">
+                                                <span class="stat-label">Memory:</span>
+                                                <span class="stat-value" id="local-embedding-memory">~2GB</span>
+                                            </span>
+                                        </div>
+                                        <p class="model-description" id="local-embedding-desc">High-performance model with 768 dimensions. Best for quality and accuracy.</p>
+                                    </div>
+
+                                    <div id="lmstudio-local-section" class="setting-subgroup hidden">
+                                        <label class="setting-label" for="lmstudio-base-url">LM Studio Server URL</label>
+                                        <div class="setting-description">Run <code>lms server start</code> and ensure the REST API is reachable.</div>
+                                        <div class="setting-inline-row">
+                                            <input type="text" id="lmstudio-base-url" class="setting-input" placeholder="http://127.0.0.1:1234">
+                                            <button type="button" id="lmstudio-refresh-models" class="btn btn-secondary">Refresh Models</button>
+                                        </div>
+                                        <div id="lmstudio-models-status" class="setting-hint hidden" data-status-type="info">Waiting for refresh…</div>
+                                        <label class="setting-label" for="lmstudio-model-select">LM Studio Embedding Model</label>
+                                        <select id="lmstudio-model-select" class="setting-select"></select>
+                                        <label class="setting-label" for="lmstudio-dimensions-input">Supported Dimensions</label>
+                                        <input type="text" id="lmstudio-dimensions-input" class="setting-input" placeholder="e.g., 768, 1024">
+                                        <div class="setting-description">Document comma-separated vector sizes supported by your LM Studio embedding model.</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Online Embedding Models -->
+                                <div id="online-embedding-section" class="setting-group hidden">
+                                    <label class="setting-label">Embedding Provider</label>
+                                    <select id="online-embedding-provider" class="setting-select">
+                                        <option value="gemini" data-description="Google's embedding models for semantic search and analysis.">
+                                            Google Gemini Embeddings
+                                        </option>
+                                        <option value="mistral" data-description="Mistral's high-performance embedding model with excellent multilingual support.">
+                                            Mistral Embeddings
+                                        </option>
+                                        <option value="nvidia" data-description="NVIDIA NIM's multilingual BGE-M3 model with 1024 dimensions.">
+                                            NVIDIA NIM Embeddings
+                                        </option>
+                                        <option value="jina" data-description="Jina's multimodal embeddings with support for text and images, up to 32k tokens.">
+                                            Jina AI Embeddings
+                                        </option>
+                            <option value="openai" data-description="OpenAI text-embedding models are not enabled in this demo build" disabled>
+                                OpenAI Embeddings (Not enabled in this demo)
+                            </option>
+                            <option value="cohere" data-description="Cohere embedding models are not enabled in this demo build" disabled>
+                                Cohere Embeddings (Not enabled in this demo)
+                            </option>
+                                    </select>
+                                    
+                                    <!-- Gemini Embedding Models -->
+                                    <div id="gemini-embedding-section" class="setting-subgroup">
+                                        <label class="setting-label">Gemini Embedding Model</label>
+                                        <select id="gemini-embedding-select" class="setting-select">
+                                            <option value="gemini-embedding-001">Gemini Embedding 001 (Current Working Model)</option>
+                                        </select>
+                                        <div class="model-info">
+                                            <p class="model-description">The only currently working Gemini embedding model. Other models have been deprecated.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Mistral Embedding Models -->
+                                    <div id="mistral-embedding-section" class="setting-subgroup hidden">
+                                        <label class="setting-label">Mistral Embedding Model</label>
+                                        <select id="mistral-embedding-select" class="setting-select">
+                                            <option value="mistral-embed">Mistral Embed (High Performance)</option>
+                                        </select>
+                                        <div class="model-info">
+                                            <p class="model-description">Mistral's embedding model with excellent multilingual support and high performance for semantic search.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- NVIDIA NIM Embedding Models -->
+                                    <div id="nvidia-embedding-section" class="setting-subgroup hidden">
+                                        <label class="setting-label">NVIDIA NIM Embedding Model</label>
+                                        <select id="nvidia-embedding-select" class="setting-select">
+                                            <option value="nvidia/nv-embedqa-e5-v5">NVIDIA NV-EmbedQA E5 V5 (1024d, query/passage)</option>
+                                            <option value="baai/bge-m3">BAAI/BGE-M3 (1024d, Multilingual)</option>
+                                            <option value="nvidia/llama-3.2-nv-embedqa-1b-v2">NVIDIA Llama 3.2 NV-EmbedQA 1B V2 (1024d, query/passage)</option>
+                                            <option value="nvidia/llama-3.2-nemoretriever-300m-embed-v2">NVIDIA Llama 3.2 NemoRetriever 300M V2 (2048d, query/passage)</option>
+                                        </select>
+                                        <div class="model-info">
+                                            <p class="model-description">NVIDIA embedding models with various capabilities. All NV EmbedQA and NemoRetriever models are asymmetric and require an input_type: use "query" for job descriptions and "passage" for candidate resumes. NemoRetriever supports configurable dimensions (384, 512, 768, 1024, 2048) with 8K token context.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Jina AI Embedding Models -->
+                                    <div id="jina-embedding-section" class="setting-subgroup hidden">
+                                        <label class="setting-label">Jina AI Embedding Model</label>
+                                        <select id="jina-embedding-select" class="setting-select">
+                                            <option value="jina-embeddings-v4">Jina Embeddings V4 (2048d, Multimodal)</option>
+                                            <option value="jina-embeddings-v3">Jina Embeddings V3 (Flexible, 8192 tokens)</option>
+                                        </select>
+                                        <div class="model-info">
+                                            <p class="model-description">Jina's latest multimodal embeddings supporting text and images with up to 32k tokens and flexible dimensions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- LLM Models Section -->
+                        <div class="settings-card bento-tile">
+                            <div class="settings-card-header">
+                                <h3 class="settings-card-title">
+                                    <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                    </svg>
+                                    LLM Models
+                                </h3>
+                                <p class="settings-card-subtitle">Configure language models for interview script generation</p>
+                            </div>
+                            <div class="settings-card-content">
+                                <!-- LLM Provider Selection -->
+                                <div class="setting-group">
+                                    <label class="setting-label">LLM Provider</label>
+<select id="llm-provider-select" class="setting-select">
+                                        <option value="gemini" data-description="Google's advanced conversational AI with superior reasoning capabilities.">
+                                            Google Gemini
+                                        </option>
+                                        <option value="cohere" data-description="Cohere Command Reasoning models with JSON mode and thinking-enabled.">
+                                            Cohere Command
+                                        </option>
+                            <option value="openai" data-description="OpenAI GPT models are not enabled in this demo build" disabled>
+                                OpenAI GPT (Not enabled in this demo)
+                            </option>
+                            <option value="anthropic" data-description="Anthropic Claude models are not enabled in this demo build" disabled>
+                                Anthropic Claude (Not enabled in this demo)
+                            </option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Gemini LLM Models -->
+                                <div id="gemini-llm-section" class="setting-subgroup">
+                                    <label class="setting-label">Gemini Chat Model</label>
+                                    <select id="gemini-llm-select" class="setting-select">
+                                        <option value="gemini-flash-latest">Gemini Flash Latest (Fast & Efficient)</option>
+                                        <option value="gemini-pro-latest">Gemini Pro Latest (Advanced Reasoning)</option>
+                                        <option value="gemini-2.0-flash">Gemini 2.0 Flash (Latest Flash)</option>
+                                        <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash Experimental</option>
+                                        <option value="gemini-1.5-pro">Gemini 1.5 Pro (Stable)</option>
+                                        <option value="gemini-1.5-flash">Gemini 1.5 Flash (Legacy)</option>
+                                    </select>
+                                    <div class="model-info">
+                                        <p class="model-description">Used for generating technical interview scripts, coding problems, and personalized questions based on job descriptions and resumes.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Cohere LLM Models -->
+                                <div id="cohere-llm-section" class="setting-subgroup hidden">
+                                    <label class="setting-label">Cohere Reasoning Model</label>
+                                    <select id="cohere-llm-select" class="setting-select">
+                                        <option value="command-a-reasoning-08-2025">Command A Reasoning (08-2025)</option>
+                                    </select>
+                                    <div class="model-info">
+                                        <p class="model-description">Uses the latest Cohere Command A Reasoning model with JSON mode and thinking enabled. Ideal for structured interview scripts.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- API Keys Section -->
+                        <div id="api-keys-section" class="settings-card bento-tile hidden">
+                            <div class="settings-card-header">
+                                <h3 class="settings-card-title">
+                                    <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+                                    </svg>
+                                    API Key Management
+                                </h3>
+                                <p class="settings-card-subtitle">Manage API keys for online services. Keys are rotated automatically.</p>
+                            </div>
+                            <div class="settings-card-content">
+                                <!-- API Key Input -->
+                                <div class="setting-group">
+                                    <label class="setting-label">Add New API Key</label>
+                                    <div class="api-key-provider-selector">
+<select id="api-key-provider-select" class="setting-select">
+                                            <option value="gemini">Google Gemini</option>
+                                            <option value="mistral">Mistral AI</option>
+                                            <option value="nvidia">NVIDIA NIM</option>
+                                            <option value="jina">Jina AI</option>
+                                            <option value="cohere">Cohere</option>
+                                            <option value="langsearch">LangSearch</option>
+                                        </select>
+                                    </div>
+                                    <div class="api-key-input-group">
+                                        <div class="api-key-input-wrapper">
+                                            <input type="password" id="settings-api-key-input" placeholder="Enter your API key..." class="setting-input">
+                                            <button type="button" id="settings-toggle-visibility" class="toggle-visibility-btn" title="Show/Hide API Key">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" class="eye-icon">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                                <circle cx="12" cy="12" r="3"/>
+                                            </svg>
+                                        </button>
+                                        </div>
+                                        <button id="settings-add-key-btn" class="btn btn-primary">Add Key</button>
+                                    </div>
+                                    <div class="api-key-help">
+                                        <span id="api-key-help-text">Get your Gemini API key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a></span>
+                                    </div>
+                                </div>
+                                
+                                <!-- API Keys List -->
+                                <div class="setting-group">
+                                    <label class="setting-label">Saved API Keys</label>
+                                    <div id="settings-api-key-list" class="api-keys-list">
+                                        <!-- Keys will be populated here -->
+                                    </div>
+                                </div>
+                                
+                                <!-- API Key Timeout Control -->
+                                <div class="setting-group">
+                                    <label class="setting-label" for="api-key-timeout-input">API Key Rotation Timeout</label>
+                                    <div class="timeout-input-group">
+                                        <input type="number" id="api-key-timeout-input" class="setting-input" min="1" max="300" value="2" step="1" placeholder="2">
+                                        <span class="timeout-unit">seconds</span>
+                                    </div>
+                                    <div class="setting-description">
+                                        Time to wait between API key rotations to prevent rate limit violations. Does not affect local models.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+<!-- Reranker Settings Section -->
+                        <div class="settings-card bento-tile">
+                            <div class="settings-card-header">
+                                <h3 class="settings-card-title">
+                                    <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <line x1="4" y1="9" x2="20" y2="9"/>
+                                        <line x1="4" y1="15" x2="20" y2="15"/>
+                                        <line x1="10" y1="3" x2="8" y2="21"/>
+                                        <line x1="16" y1="3" x2="14" y2="21"/>
+                                    </svg>
+                                    Reranker Configuration
+                                </h3>
+                                <p class="settings-card-subtitle">Reorder vector-ranked candidates using semantic reranking</p>
+                            </div>
+                            <div class="settings-card-content">
+                                <div class="setting-group">
+                                    <label class="setting-label">Enable Reranker</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="reranker-enabled">
+                                            <span class="checkbox-custom"></span>
+                                            <span class="checkbox-text">Activate semantic reranking after initial vector search</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="setting-group">
+<label class="setting-label">Reranker Provider</label>
+<select id="reranker-provider" class="setting-select">
+                                        <option value="jina">Jina AI Reranker</option>
+                                        <option value="nvidia">NVIDIA Reranker</option>
+                                        <option value="cohere">Cohere Reranker</option>
+                                        <option value="langsearch">LangSearch Reranker</option>
+                                    </select>
+                                    <div class="setting-description">Only providers that are also available for embeddings are listed to reuse the same API keys.</div>
+                                </div>
+
+                                <div id="reranker-jina-section" class="setting-subgroup">
+                                    <label class="setting-label">Jina Reranker Model</label>
+                                    <select id="reranker-jina-model" class="setting-select">
+                                        <option value="jina-reranker-v2-base-multilingual">jina-reranker-v2-base-multilingual</option>
+                                    </select>
+                                    <div class="model-info">
+                                        <p class="model-description">Max query tokens: 512. Up to 2048 documents per request. One query-document tuple per request.</p>
+                                    </div>
+                                </div>
+
+<div id="reranker-nvidia-section" class="setting-subgroup hidden">
+                                    <label class="setting-label">NVIDIA Reranker Model</label>
+                                    <select id="reranker-nvidia-model" class="setting-select">
+                                        <option value="nvidia/llama-3.2-nemoretriever-500m-rerank-v2">nvidia/llama-3.2-nemoretriever-500m-rerank-v2</option>
+                                    </select>
+                                    <div class="model-info">
+                                        <p class="model-description">Input: query + passages. Truncate: END. Evaluated up to ~8192 tokens sequence. Longer texts should be chunked/truncated.</p>
+                                    </div>
+                                </div>
+
+                                <div id="reranker-cohere-section" class="setting-subgroup hidden">
+                                    <label class="setting-label">Cohere Reranker Model</label>
+                                    <select id="reranker-cohere-model" class="setting-select">
+                                        <option value="rerank-v3.5">rerank-v3.5</option>
+                                    </select>
+                                    <div class="model-info">
+                                        <p class="model-description">Cohere recommends not sending more than 1,000 documents in a single request. Long documents are truncated automatically (default 4096 tokens per doc).</p>
+                                    </div>
+                                </div>
+
+                                <div id="reranker-langsearch-section" class="setting-subgroup hidden">
+                                    <label class="setting-label">LangSearch Reranker Model</label>
+                                    <select id="reranker-langsearch-model" class="setting-select">
+                                        <option value="langsearch-reranker-v1">langsearch-reranker-v1</option>
+                                    </select>
+                                    <div class="model-info">
+                                        <p class="model-description">Max 50 documents per request. Returns indices and semantic relevance scores.</p>
+                                    </div>
+                                </div>
+
+                                <div class="setting-group">
+                                    <label class="setting-label" for="reranker-topn">Top N to rerank</label>
+                                    <div class="timeout-input-group">
+                                        <input type="number" id="reranker-topn" class="setting-input" min="1" max="2000" value="25" step="1" placeholder="25">
+                                        <span class="timeout-unit">documents</span>
+                                    </div>
+                                    <div class="setting-description">How many of the top vector results to send to the reranker. Cohere recommends ≤ 1000; LangSearch supports ≤ 50; Jina allows ≤ 2048.</div>
+                                </div>
+
+                                <hr style="border-color: rgba(255,255,255,.08); margin: 1rem 0;" />
+
+                                <div class="setting-group">
+                                    <label class="setting-label">Enable Multi-step Rerank</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="reranker-multi-enabled">
+                                            <span class="checkbox-custom"></span>
+                                            <span class="checkbox-text">Apply 2-step sequential reranking (each step can use a different provider)</span>
+                                        </label>
+                                    </div>
+                                    <div class="setting-description">When enabled, the single-provider settings above are ignored and the pipeline below is used.</div>
+                                </div>
+
+                                <div id="reranker-pipeline" class="setting-subgroup hidden">
+                                    <div class="setting-subgroup">
+                                        <h4>Step 1</h4>
+                                        <div class="setting-group">
+                                            <label class="setting-label">Provider</label>
+                                            <select id="reranker-step1-provider" class="setting-select">
+                                                <option value="jina">Jina</option>
+                                                <option value="nvidia">NVIDIA</option>
+                                                <option value="cohere">Cohere</option>
+                                                <option value="langsearch">LangSearch</option>
+                                            </select>
+                                        </div>
+                                        <div id="reranker-step1-jina" class="setting-subgroup">
+                                            <label class="setting-label">Jina Model</label>
+                                            <select id="reranker-step1-jina-model" class="setting-select">
+                                                <option value="jina-reranker-v2-base-multilingual">jina-reranker-v2-base-multilingual</option>
+                                            </select>
+                                        </div>
+                                        <div id="reranker-step1-nvidia" class="setting-subgroup hidden">
+                                            <label class="setting-label">NVIDIA Model</label>
+                                            <select id="reranker-step1-nvidia-model" class="setting-select">
+                                                <option value="nvidia/llama-3.2-nemoretriever-500m-rerank-v2">nvidia/llama-3.2-nemoretriever-500m-rerank-v2</option>
+                                            </select>
+                                        </div>
+                                        <div id="reranker-step1-cohere" class="setting-subgroup hidden">
+                                            <label class="setting-label">Cohere Model</label>
+                                            <select id="reranker-step1-cohere-model" class="setting-select">
+                                                <option value="rerank-v3.5">rerank-v3.5</option>
+                                            </select>
+                                        </div>
+                                        <div id="reranker-step1-langsearch" class="setting-subgroup hidden">
+                                            <label class="setting-label">LangSearch Model</label>
+                                            <select id="reranker-step1-langsearch-model" class="setting-select">
+                                                <option value="langsearch-reranker-v1">langsearch-reranker-v1</option>
+                                            </select>
+                                        </div>
+                                        <div class="setting-group">
+                                            <label class="setting-label" for="reranker-step1-topn">Top N</label>
+                                            <div class="timeout-input-group">
+                                                <input type="number" id="reranker-step1-topn" class="setting-input" min="1" max="2000" value="50">
+                                                <span class="timeout-unit">documents</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="setting-subgroup" style="margin-top: 1rem;">
+                                        <h4>Step 2</h4>
+                                        <div class="setting-group">
+                                            <label class="setting-label">Provider</label>
+                                            <select id="reranker-step2-provider" class="setting-select">
+                                                <option value="cohere">Cohere</option>
+                                                <option value="jina">Jina</option>
+                                                <option value="nvidia">NVIDIA</option>
+                                                <option value="langsearch">LangSearch</option>
+                                            </select>
+                                        </div>
+                                        <div id="reranker-step2-cohere" class="setting-subgroup">
+                                            <label class="setting-label">Cohere Model</label>
+                                            <select id="reranker-step2-cohere-model" class="setting-select">
+                                                <option value="rerank-v3.5">rerank-v3.5</option>
+                                            </select>
+                                        </div>
+                                        <div id="reranker-step2-jina" class="setting-subgroup hidden">
+                                            <label class="setting-label">Jina Model</label>
+                                            <select id="reranker-step2-jina-model" class="setting-select">
+                                                <option value="jina-reranker-v2-base-multilingual">jina-reranker-v2-base-multilingual</option>
+                                            </select>
+                                        </div>
+                                        <div id="reranker-step2-nvidia" class="setting-subgroup hidden">
+                                            <label class="setting-label">NVIDIA Model</label>
+                                            <select id="reranker-step2-nvidia-model" class="setting-select">
+                                                <option value="nvidia/llama-3.2-nemoretriever-500m-rerank-v2">nvidia/llama-3.2-nemoretriever-500m-rerank-v2</option>
+                                            </select>
+                                        </div>
+                                        <div id="reranker-step2-langsearch" class="setting-subgroup hidden">
+                                            <label class="setting-label">LangSearch Model</label>
+                                            <select id="reranker-step2-langsearch-model" class="setting-select">
+                                                <option value="langsearch-reranker-v1">langsearch-reranker-v1</option>
+                                            </select>
+                                        </div>
+                                        <div class="setting-group">
+                                            <label class="setting-label" for="reranker-step2-topn">Top N</label>
+                                            <div class="timeout-input-group">
+                                                <input type="number" id="reranker-step2-topn" class="setting-input" min="1" max="2000" value="25">
+                                                <span class="timeout-unit">documents</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gmail Workspace Section -->
+                        <div class="settings-card bento-tile">
+                            <div class="settings-card-header">
+                                <h3 class="settings-card-title">
+                                    <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                                    </svg>
+                                    Gmail Integration
+                                </h3>
+                                <p class="settings-card-subtitle">Configure Google OAuth credentials for Gmail access</p>
+                            </div>
+                            <div class="settings-card-content">
+                                <div class="setting-group">
+                                    <label class="setting-label" for="gmail-client-id">Google OAuth Client ID</label>
+                                    <input type="text" id="gmail-client-id" class="setting-input" placeholder="Enter your Google OAuth Client ID">
+                                    <div class="setting-description">
+                                        Get this from <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Google Cloud Console</a> → Credentials → Create OAuth 2.0 Client ID (Web application type)
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label" for="gmail-client-secret">Google OAuth Client Secret</label>
+                                    <div class="api-key-input-wrapper">
+                                        <input type="password" id="gmail-client-secret" class="setting-input" placeholder="Enter your Google OAuth Client Secret">
+                                        <button type="button" id="gmail-toggle-secret-visibility" class="toggle-visibility-btn" title="Show/Hide Secret">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" class="eye-icon">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                                <circle cx="12" cy="12" r="3"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Connection Status</label>
+                                    <div id="gmail-settings-status" class="connection-status-indicator" style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; text-align: center;">
+                                        <span id="gmail-settings-status-text">Not configured</span>
+                                    </div>
+                                </div>
+                                
+                                <div style="text-align: center; margin-top: 1rem;">
+                                    <button id="gmail-save-credentials-btn" class="btn btn-primary">
+                                        <span>Save Credentials</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="setting-group" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                                    <label class="setting-label">Setup Instructions</label>
+                                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; font-size: 0.875rem;">
+                                        <ol style="margin: 0; padding-left: 1.5rem;">
+                                            <li style="margin-bottom: 0.5rem;">Go to <a href="https://console.cloud.google.com/" target="_blank" rel="noopener">Google Cloud Console</a></li>
+                                            <li style="margin-bottom: 0.5rem;">Create or select a project</li>
+                                            <li style="margin-bottom: 0.5rem;">Enable Gmail API in APIs & Services</li>
+                                            <li style="margin-bottom: 0.5rem;">Go to Credentials → Create Credentials → OAuth 2.0 Client ID</li>
+                                            <li style="margin-bottom: 0.5rem;">Application type: Web application</li>
+                                            <li style="margin-bottom: 0.5rem;">Authorized redirect URIs: <code style="background: rgba(0,0,0,0.3); padding: 0.2rem 0.4rem; border-radius: 4px;">http://localhost:3000/api/gmail-workspace/oauth2callback</code></li>
+                                            <li>Copy Client ID and Client Secret and paste them above</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Performance Section -->
+                        <div class="settings-card bento-tile">
+                            <div class="settings-card-header">
+                                <h3 class="settings-card-title">
+                                    <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                                    </svg>
+                                    Performance
+                                </h3>
+                                <p class="settings-card-subtitle">Optimize processing based on system capabilities</p>
+                            </div>
+                            <div class="settings-card-content">
+                                <div class="setting-group">
+                                    <label class="setting-label">Hardware Acceleration</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="webgpu-enabled" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span class="checkbox-text">
+                                                Enable WebGPU acceleration (recommended for supported browsers)
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <!-- Embedding concurrency control -->
+                                <div class="setting-group">
+                                    <label class="setting-label" for="embedding-concurrency-input">Embedding Workers (Concurrency)</label>
+                                    <div class="timeout-input-group">
+                                        <input type="number" id="embedding-concurrency-input" class="setting-input" min="1" max="24" value="3" step="1" placeholder="3">
+                                        <span class="timeout-unit">workers</span>
+                                    </div>
+                                    <div class="setting-description">
+                                        Number of resumes to embed in parallel. Default is 3. Higher values may improve speed with online providers (keys rotate + rate limits apply). For local models, increasing too high can exhaust memory.
+                                    </div>
+                                </div>
+
+                                <div class="setting-group">
+                                    <label class="setting-label">Processing Batch Size</label>
+                                    <select id="batch-size-select" class="setting-select">
+                                        <option value="1">Single Document (Lowest memory usage)</option>
+                                        <option value="5" selected>5 Documents (Balanced)</option>
+                                        <option value="10">10 Documents (Faster processing)</option>
+                                        <option value="25">25 Documents (High performance)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+
+        <!-- Modals for Tasks -->
+        <div id="task-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modal-title">Task</h2>
+                    <button id="modal-close-btn" class="modal-close">&times;</button>
+                </div>
+                <div id="modal-body" class="modal-body">
+                    <!-- Ingest & Rank Form -->
+                    <div id="form-ingest-rank" class="hidden">
+                        <div class="upload-area">
+                            <div id="file-drop-zone" class="file-drop-zone">
+                                <div class="drop-zone-content">
+                                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="7,10 12,15 17,10"/>
+                                        <line x1="12" y1="15" x2="12" y2="3"/>
+                                    </svg>
+                                    <h3>Drop Excel file here</h3>
+                                    <p>or click to browse</p>
+                                    <input type="file" id="file-input" accept=".xlsx,.xls,.pdf" multiple hidden>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-form">
+                            <div class="form-group">
+                                <label for="job-title">Role Name</label>
+                                <input type="text" id="job-title" placeholder="e.g., Senior Software Engineer">
+                            </div>
+                            
+                            <!-- AI Model Configuration -->
+                            <div class="form-group">
+                                <label class="setting-label">Model Configuration</label>
+                                <div class="settings-reference">
+                                    <div class="settings-link-container">
+                                        <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                            <circle cx="12" cy="12" r="3"/>
+                                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                                        </svg>
+                                        <div class="settings-text">
+                                            <p class="settings-primary">Model configuration moved to Settings</p>
+                                            <p class="settings-secondary">Configure embedding and LLM models in the main settings page</p>
+                                        </div>
+                                        <button type="button" class="settings-goto-btn" onclick="app.showView('settings')">
+                                            Go to Settings
+                                        </button>
+                                    </div>
+                                    <div class="model-status-container" style="margin-top: 12px; display: flex; align-items: center; justify-content: space-between;">
+                                        <small id="model-status" class="flex items-center" style="display: flex; align-items: center; color: #6b7280; font-size: 12px;">
+                                            <span id="model-indicator" style="width: 8px; height: 8px; background-color: #9ca3af; border-radius: 50%; margin-right: 6px;"></span>
+                                            <span id="model-status-text">Using settings configuration</span>
+                                        </small>
+                                        <small id="model-performance" style="background-color: #f3f4f6; color: #374151; padding: 2px 8px; border-radius: 4px; font-size: 11px;">
+                                            Ready
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="key-skills">Key Skills & Requirements</label>
+                                <textarea id="key-skills" rows="4" placeholder="List key skills, technologies, qualifications... e.g., Python, React, 5+ years experience, AWS, machine learning"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="algorithm-selection">Matching Algorithm</label>
+                                <select id="algorithm-selection" class="algorithm-select">
+                                    <option value="cosine" title="Focuses on skill relevance, ignores resume length differences">Cosine Similarity (Best for Resume Matching)</option>
+                                    <option value="euclidean" title="More sensitive to exact skill combinations and experience levels">Euclidean Distance (Strict Profile Matching)</option>
+                                    <option value="pearson" title="Finds candidates with similar skill development patterns">Pearson Correlation (Pattern-Based Matching)</option>
+                                    <option value="manhattan" title="Robust to outliers, good for diverse skill sets">Manhattan Distance (Outlier Resistant)</option>
+                                    <option value="dot_product" title="Raw similarity without normalization">Dot Product (Raw Similarity)</option>
+                                </select>
+                                <small class="algorithm-help"><strong>Cosine Similarity</strong> is recommended for semantic resume matching as it focuses on skill relevance regardless of resume length</small>
+                            </div>
+                            <div class="form-group" id="algorithm-params" style="display: none;">
+                                <label for="minkowski-p">Minkowski p-parameter</label>
+                                <input type="number" id="minkowski-p" value="2" step="0.1" min="1">
+                                <small>p=1 (Manhattan), p=2 (Euclidean), p>2 (Higher order)</small>
+                            </div>
+                            <button id="start-ingest-rank-btn" class="btn btn-primary">
+                                <span>Analyze Candidates</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Rank Existing Form -->
+                    <div id="form-rank-existing" class="hidden">
+                        <div class="job-form">
+                            <div class="form-group">
+                                <label for="job-title-existing">Role Name</label>
+                                <input type="text" id="job-title-existing" placeholder="e.g., Senior Product Manager">
+                            </div>
+                            
+                            <!-- AI Model Configuration Reference -->
+                            <div class="form-group">
+                                <label class="setting-label">Model Configuration</label>
+                                <div class="settings-reference">
+                                    <div class="settings-link-container">
+                                        <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                            <circle cx="12" cy="12" r="3"/>
+                                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                                        </svg>
+                                        <div class="settings-text">
+                                            <p class="settings-primary">Model configuration in Settings</p>
+                                            <p class="settings-secondary">Configure embedding models for resume analysis</p>
+                                        </div>
+                                        <button type="button" class="settings-goto-btn" onclick="app.showView('settings')">
+                                            Settings
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="key-skills-existing">Key Skills & Requirements</label>
+                                <textarea id="key-skills-existing" rows="4" placeholder="List key skills, technologies, qualifications... e.g., Product management, SQL, Analytics, Agile, MBA preferred"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="algorithm-selection-existing">Matching Algorithm</label>
+                                <select id="algorithm-selection-existing" class="algorithm-select">
+                                    <option value="cosine" title="Focuses on skill relevance, ignores resume length differences">Cosine Similarity (Best for Resume Matching)</option>
+                                    <option value="euclidean" title="More sensitive to exact skill combinations and experience levels">Euclidean Distance (Strict Profile Matching)</option>
+                                    <option value="pearson" title="Finds candidates with similar skill development patterns">Pearson Correlation (Pattern-Based Matching)</option>
+                                    <option value="manhattan" title="Robust to outliers, good for diverse skill sets">Manhattan Distance (Outlier Resistant)</option>
+                                    <option value="dot_product" title="Raw similarity without normalization">Dot Product (Raw Similarity)</option>
+                                </select>
+                                <small class="algorithm-help"><strong>Cosine Similarity</strong> is recommended for semantic resume matching as it focuses on skill relevance regardless of resume length</small>
+                            </div>
+                            <div class="form-group" id="algorithm-params-existing" style="display: none;">
+                                <label for="minkowski-p-existing">Minkowski p-parameter</label>
+                                <input type="number" id="minkowski-p-existing" value="2" step="0.1" min="1">
+                                <small>p=1 (Manhattan), p=2 (Euclidean), p>2 (Higher order)</small>
+                            </div>
+                            <button id="start-rank-existing-btn" class="btn btn-primary">
+                                <span>Rank Existing Candidates</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Ingest Only Form -->
+                    <div id="form-ingest-only" class="hidden">
+                        <!-- Embedding Model Configuration Reference -->
+                        <div class="form-group" style="margin-bottom: 1.5rem;">
+                            <label class="form-label">
+                                <span>Embedding Model Configuration</span>
+                                <span class="model-info-icon" title="Configure embedding models in Settings">⚙️</span>
+                            </label>
+                            <div class="settings-reference compact">
+                                <div class="settings-link-container compact">
+                                    <div class="settings-text">
+                                        <p class="settings-primary">Using model from Settings</p>
+                                        <p class="settings-secondary">Configure embedding models for document processing</p>
+                                    </div>
+                                    <button type="button" class="settings-goto-btn compact" onclick="app.showView('settings')">
+                                        Configure →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="upload-area">
+                            <div id="file-drop-zone-ingest" class="file-drop-zone">
+                                <div class="drop-zone-content">
+                                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="7,10 12,15 17,10"/>
+                                        <line x1="12" y1="15" x2="12" y2="3"/>
+                                    </svg>
+                                    <h3>Drop Excel file here</h3>
+                                    <p>or click to browse</p>
+                                    <input type="file" id="file-input-ingest" accept=".xlsx,.xls,.pdf" multiple hidden>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center" style="margin-top: 1rem;">
+                            <button id="start-ingest-only-btn" class="btn btn-primary">
+                                <span>Add to Database</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recycle Vectors Confirmation Modal -->
+        <div id="recycle-vectors-modal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" style="display:inline-block;vertical-align:middle;margin-right:8px;">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        Recycle Vectors
+                    </h2>
+                    <button id="recycle-vectors-modal-close" class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Embedding Model Configuration Reference -->
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label class="form-label">
+                            <span>Target Embedding Model Configuration</span>
+                            <span class="model-info-icon" title="Configure embedding models in Settings">⚙️</span>
+                        </label>
+                        <div class="settings-reference compact">
+                            <div class="settings-link-container compact">
+                                <div class="settings-text">
+                                    <p class="settings-primary">Using model from Settings</p>
+                                    <p class="settings-secondary">Will regenerate all embeddings with current settings model</p>
+                                </div>
+                                <button type="button" class="settings-goto-btn compact" onclick="app.showView('settings')">
+                                    Configure →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="warning-content">
+                        <p><strong>This will regenerate ALL vector embeddings using the selected BGE model.</strong></p>
+                        <p>This process will:</p>
+                        <ul>
+                            <li>Clear all existing embeddings, jobs, and rankings</li>
+                            <li>Scan stored resume files and re-extract text content</li>
+                            <li>Generate new embeddings using the current model</li>
+                            <li>Update candidate records with fresh vector data</li>
+                            <li>Ensure all embeddings use the same model for consistency</li>
+                        </ul>
+                        <p><em>This may take several minutes depending on the number of resumes. All previous job searches will be cleared.</em></p>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="recycle-vectors-cancel" class="btn btn-secondary">
+                            <span>Cancel</span>
+                        </button>
+                        <button id="recycle-vectors-confirm" class="btn btn-primary">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                                <path d="M3 3v5h5"/>
+                                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                                <path d="M16 16h5v5"/>
+                            </svg>
+                            <span>Start Recycling</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Past Jobs Modal -->
+        <div id="past-jobs-modal" class="modal-overlay hidden">
+            <div class="modal-content" style="max-width: 1000px;">
+                <div class="modal-header">
+                    <h2>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" style="display:inline-block;vertical-align:middle;margin-right:8px;">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        Past Jobs
+                    </h2>
+                    <button id="past-jobs-close" class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="jobs-toolbar" style="display:flex;gap:.75rem;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+                        <div style="display:flex;gap:.5rem;align-items:center;flex:1;">
+                            <input type="text" id="jobs-search" placeholder="Search jobs..." class="setting-input" style="max-width:320px;" />
+                            <button id="jobs-search-btn" class="btn btn-secondary small">Search</button>
+                        </div>
+                        <div style="display:flex;gap:.5rem;align-items:center;">
+                            <button id="drop-all-jobs-btn" class="btn btn-primary small" title="Delete all past jobs">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                                <span>Drop All</span>
+                            </button>
+                            <label for="jobs-page-size" class="setting-label" style="margin:0;">Page size</label>
+                            <select id="jobs-page-size" class="setting-select" style="width:140px;">
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="jobs-list" class="candidates-grid"><!-- Job cards render here --></div>
+                    <div class="pagination" style="display:flex;align-items:center;justify-content:space-between;margin-top:1rem;">
+                        <button id="jobs-prev" class="btn btn-secondary">Prev</button>
+                        <div id="jobs-page-info" class="text-muted"></div>
+                        <button id="jobs-next" class="btn btn-secondary">Next</button>
+                    </div>
+
+                    <hr style="border-color: rgba(255,255,255,.08); margin: 1.25rem 0;" />
+
+                    <div id="job-details" class="hidden">
+                        <div class="section-header" style="margin: .5rem 0 1rem 0;">
+                            <h3 class="section-title" id="job-details-title">Job Details</h3>
+                            <p class="section-subtitle" id="job-details-sub">Top ranked candidates</p>
+                        </div>
+                        <div id="job-results-list" class="results-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <h3 id="loading-title">Loading...</h3>
+                <p id="loading-message">Please wait while we prepare everything for you.</p>
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div id="notification" class="notification hidden">
+            <div class="notification-content">
+                <span id="notification-message"></span>
+                <button id="notification-close" class="notification-close">×</button>
+            </div>
+        </div>
+
+        <!-- Theme Studio Toggle -->
+        <button id="theme-studio-toggle" class="theme-studio-toggle" aria-label="Open Theme Studio" title="Theme Studio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="gear-icon">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+        </button>
+
+        <!-- Theme Studio Panel -->
+        <div id="theme-studio" class="theme-studio hidden" aria-label="Theme Studio Panel">
+            <div class="studio-header">
+                <div class="studio-title">Theme Studio<span class="studio-badge">Hr Analyzer</span></div>
+                <div class="studio-actions">
+                    <button id="theme-studio-minimize" class="studio-icon-btn" aria-label="Minimize">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                    </button>
+                    <button id="theme-studio-close" class="studio-icon-btn" aria-label="Close">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="studio-scroll">
+                <div class="studio-group">
+                    <h4>Brand Core</h4>
+                    <div class="control">
+                        <label for="theme-hue">Hue <span data-value="theme-hue-value"></span></label>
+                        <input id="theme-hue" type="range" min="0" max="360" value="210" data-var="brand-hue" />
+                    </div>
+                    <div class="control">
+                        <label for="theme-sat">Saturation <span data-value="theme-sat-value"></span></label>
+                        <input id="theme-sat" type="range" min="30" max="100" value="90" data-var="brand-sat" />
+                    </div>
+                    <div class="control">
+                        <label for="theme-accent-shift">Accent Shift <span data-value="theme-accent-shift-value"></span></label>
+                        <input id="theme-accent-shift" type="range" min="-90" max="90" value="60" data-var="accent-shift" />
+                    </div>
+                </div>
+                <div class="studio-group">
+                    <h4>Surface</h4>
+                    <div class="control">
+                        <label for="theme-depth">Depth Intensity <span data-value="theme-depth-value"></span></label>
+                        <input id="theme-depth" type="range" min="5" max="40" value="20" data-var="depth" />
+                    </div>
+                    <div class="control">
+                        <label for="theme-glass">Glass Blur <span data-value="theme-glass-value"></span></label>
+                        <input id="theme-glass" type="range" min="0" max="40" value="20" data-var="glass-blur" />
+                    </div>
+                    <div class="control">
+                        <label for="theme-radius">Radius <span data-value="theme-radius-value"></span></label>
+                        <input id="theme-radius" type="range" min="4" max="32" value="24" data-var="radius" />
+                    </div>
+                </div>
+                <div class="studio-group">
+                    <h4>Typography</h4>
+                    <div class="control">
+                        <label for="theme-font-weight">Weight <span data-value="theme-font-weight-value"></span></label>
+                        <input id="theme-font-weight" type="range" min="300" max="800" step="50" value="500" data-var="font-weight" />
+                    </div>
+                    <div class="control">
+                        <label for="theme-letter">Letter Spacing <span data-value="theme-letter-value"></span></label>
+                        <input id="theme-letter" type="range" min="-1" max="4" step="0.1" value="0" data-var="letter-spacing" />
+                    </div>
+                </div>
+                <div class="studio-group">
+                    <h4>API Configuration</h4>
+                    <div class="control">
+                        <label>AI Model Configuration</label>
+                        <div class="studio-reference">
+                            <p class="studio-ref-text">Model settings moved to main Settings page</p>
+                            <button type="button" class="studio-settings-btn" onclick="app.showView('settings')">
+                                Open Settings →
+                            </button>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <label for="api-key-input">Gemini API Key</label>
+                        <div class="api-key-form">
+                            <div class="api-key-input-wrapper">
+                                <input id="api-key-input" type="password" placeholder="Enter your Gemini API key" />
+                                <button id="toggle-key-visibility" class="toggle-visibility-btn" type="button" title="Show/Hide API Key">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <button id="add-api-key-btn" class="btn btn-secondary small">Add</button>
+                        </div>
+                        <div class="api-key-help">
+                            <small>Get your API key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a></small>
+                        </div>
+                    </div>
+                    <div class="api-key-list-wrapper">
+                        <label>Saved Keys (Used in Rotation)</label>
+                        <div id="api-key-list" class="api-key-list"></div>
+                    </div>
+                </div>
+                <div class="studio-group">
+                    <h4>Export & Presets</h4>
+                    <div class="studio-preset-actions">
+                        <input id="theme-name" type="text" placeholder="Custom Theme Name" />
+                        <button id="theme-save" class="btn btn-secondary small">Save</button>
+                        <button id="theme-export" class="btn btn-secondary small">Export CSS</button>
+                    </div>
+                    <div id="theme-presets" class="theme-presets" aria-label="Saved Themes"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="webgpu-compatibility-check.js"></script>
+    <script src="webgpu-optimization-tips.js"></script>
+    <script src="animations.js"></script>
+    <script src="script.js"></script>
+    <script src="gmail-workspace.js"></script>
+</body>
+</html>
